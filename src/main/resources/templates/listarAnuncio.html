@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a th:href="@{/formAnuncio}" class="btn btn-primary"  th:text="#{text.insertar.anuncio}">Insertar Anuncio</a>
+				</h4>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th  th:text="#{text.anuncio.codigoAgencia.nombre}">Codigo Agencia</th>
+							<th th:text="#{text.anuncio.fechaPublicacion }">Fecha de la publicacion</th>
+							<th th:text="#{text.anuncio.precio }">precio</th>
+							<th th:text="#{text.anuncio.numKm}">numero de km</th>
+							<th th:text="#{text.anuncio.nuVehiculo.marca}">Numero de oferta</th>
+							<th th:text="#{text.anuncio.codigoAgencia.nombre}">editar</th>
+							<th th:text="#{text.anuncio.codigoAgencia.nombre}">eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="anuncio: ${list}">
+							<td th:text="${anuncio.codigoAnuncio}" ></td>
+							<td th:text="${anuncio.codigoAgencia.nombre}"></td>
+							<td th:text="${anuncio.fechaPublicacion}"></td>
+							<td th:text="${anuncio.precio}"></td>
+							<td th:text="${anuncio.numKm}"></td>
+							<td th:text="${anuncio.nuVehiculo.marca}"></td>
+							<td><a class="btn btn-primary btn-sm"
+								th:href="@{/formAnuncio/} + ${anuncio.codigoAnuncio}" th:text="#{text.anuncio.buton.edit}"></a></td>
+							<td><a class="btn btn-danger btn-sm"
+								th:href="@{/eliminarAnuncio/} + ${anuncio.codigoAnuncio}" th:text="#{text.anuncio.buton.delete}"
+								onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
+						</tr>
+					</tbody>
+
+				</table>
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<nav aria-label="Pagination">
+							<ul class="pagination justify-content-center">
+								<li class="page-item"
+									th:classappend="${prev == 0 ? 'disabled': ''}"><a
+									class="page-link" th:href="@{|/listarAgencias?page=${prev}|}" th:text="#{text.anterior.footer}">Anterior</a>
+								</li>
+								<li class="page-item" th:each="page : ${pages}"
+									th:classappend="${current == page ? 'active': ''}"><a
+									class="page-link" th:href="@{|/listarAgencias?page=${page}|}"
+									th:text="${page}"></a></li>
+								<li class="page-item"
+									th:classappend="${current == last ? 'disabled': ''}"><a
+									class="page-link" th:href="@{|/listarAgencias?page=${next}|}" th:text="#{text.next.footer}">Siguiente</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<div class="col-md-2"></div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

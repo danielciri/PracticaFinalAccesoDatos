@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th th:text="#{text.agencia.nombre}">nombre</th>
+							<th th:text="#{text.agencia.numeTelefono}">Numero Telefono</th>
+							<th th:text="#{text.agencia.email}">email</th>
+							<th th:text="#{text.agencia.codPostal.nombre}">Nombre Agencia</th>
+						
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="agencia: ${list}">
+							<td th:text="${agencia.codigo}"></td>
+							<td th:text="${agencia.nombre}"></td>
+							<td th:text="${agencia.numeTelefono}"></td>
+							<td th:text="${agencia.email}"></td>
+							<td th:text="${agencia.codPostal.nombre}"></td>
+			
+						</tr>
+					</tbody>
+
+				</table>
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<nav aria-label="Pagination">
+							<ul class="pagination justify-content-center">
+								<li class="page-item"
+									th:classappend="${prev == 0 ? 'disabled': ''}"><a
+									class="page-link" th:href="@{|/listarAgencias?page=${prev}|}" th:text="#{text.anterior.footer}">Anterior</a>
+								</li>
+								<li class="page-item" th:each="page : ${pages}"
+									th:classappend="${current == page ? 'active': ''}"><a
+									class="page-link" th:href="@{|/listarAgencias?page=${page}|}"
+									th:text="${page}"></a></li>
+								<li class="page-item"
+									th:classappend="${current == last ? 'disabled': ''}"><a
+									class="page-link" th:href="@{|/listarAgencias?page=${next}|}" th:text="#{text.next.footer}">Siguiente</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

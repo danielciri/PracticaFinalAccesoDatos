@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<img class="img-thumbnail rounded float-left" style="max-width: 25%"
+					th:src="@{'/uploads/' + ${vehiculo.foto}}"
+					th:alt="${vehiculo.foto}" />
+				<ul class="list-group">
+					<li class="list-group-item" th:text="${vehiculo.numeroOferta}">
+					<li class="list-group-item" th:text="${vehiculo.marca}">
+					<li class="list-group-item" th:text="${vehiculo.modelo}">
+					<li class="list-group-item" th:text="${vehiculo.numPlazas}">
+					<li class="list-group-item" th:text="${vehiculo.tipoCambio}">
+					<li class="list-group-item" th:text="${vehiculo.anyo_vehiculo}">
+					<li class="list-group-item" th:text="${vehiculo.combustible}">
+					<li class="list-group-item" th:text="${vehiculo.tipo}">
+					<li class="list-group-item" th:text="${vehiculo.codAgencia.nombre}">
+				</ul>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
+
+
